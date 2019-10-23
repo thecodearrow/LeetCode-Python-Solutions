@@ -3,38 +3,29 @@
 #https://www.youtube.com/watch?v=NYeVhmWsWec&t=721s
 
 class Solution:
-    def maximalSquare(self, matrix):
-        if(matrix==[]):
+    def maximalSquare(self, matrix: List[List[str]]) -> int:
+        N=len(matrix)
+        if(N==0):
             return 0
-        rows=len(matrix)
-        cols=len(matrix[0])
+        M=len(matrix[0])
+        max_square_length=0
+        dp=[[0 for j in range(M)]for i in range(N)]
+        for i in range(N):
+            for j in range(M):
+                if(matrix[i][j]=='1'):
+                    max_square_length=1
+                    dp[i][j]=1
+        for i in range(1,N):
+            for j in range(1,M):
+                left_cell=dp[i][j-1]
+                top_cell=dp[i-1][j]
+                diagonal_cell=dp[i-1][j-1]
+                if(top_cell and left_cell and diagonal_cell and dp[i][j]):
+                    dp[i][j]=min(diagonal_cell,top_cell,left_cell)+1
+                    max_square_length=max(max_square_length,dp[i][j])
+            
+            
+        return (max_square_length*max_square_length)
         
-        dp=[]
-        ans=0 
-        for i in range(rows):
-            dp.append([])
-            for j in range(cols):
-                dp[i].append(0)
-                
-        for i in range(cols):
-            if(matrix[0][i]=="1"):
-                dp[0][i]=1 
-                ans=1
         
-        for j in range(rows):
-            if(matrix[j][0]=="1"):
-                dp[j][0]=1
-                ans=1
-                
-              
-        for i in range(1,rows):
-            for j in range(1,cols):
-                if(matrix[i][j]=="1"):
-                    size=min(dp[i][j-1],dp[i-1][j],dp[i-1][j-1])
-                    dp[i][j]=size+1
-                    ans=max(dp[i][j],ans)
-       
-        area=ans*ans
-        return area
-                    
         
