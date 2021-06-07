@@ -16,5 +16,5 @@ class Solution:
         for i in range(len(verticalCuts)-1):
             maxW=max(maxW,verticalCuts[i+1]-verticalCuts[i])
         
-        return (maxH%MOD*maxW%MOD)%MOD #note! 
+        return (maxH%MOD*maxW%MOD)%MOD #MOD prevents overflow! 
             
