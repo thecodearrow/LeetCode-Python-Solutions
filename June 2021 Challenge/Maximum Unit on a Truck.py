@@ -6,7 +6,7 @@ class Solution:
         #sort by units (second idx)
         boxTypes=sorted(boxTypes,key=lambda x:x[1],reverse=True)
         ans=0
-        print(boxTypes)
+        #from each box type, take as much as possible!
         for w,val in boxTypes:
             if(truckSize==0):
                 break
