@@ -15,7 +15,7 @@ class NumArray:
     def add(self, index: int, val: int) -> None:
         index+=1 #0-index to 1-inde
         while index<=self.size:
-            print(index,val)
+            print(index,)
             self.fenwick_arr[index]+=val
             index+=(index & -index)
     def update(self, index: int, val: int) -> None:

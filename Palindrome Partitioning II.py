@@ -2,8 +2,9 @@
 class Solution:
     def minCut(self, s: str) -> int:
         n=len(s)
-        def preComputePali():
-            isPali=[[False for j in range(n)]for i in range(n)]  
+        isPali=[[False for j in range(n)]for i in range(n)] 
+        
+        def preComputePali(): 
             for l in range(n):
                 for i in range(n-l):
                     j=i+l
@@ -13,14 +14,9 @@ class Solution:
                             isPali[i][j]=True 
                         else:
                             isPali[i][j]=isPali[i+1][j-1]
-            return isPali
-        
-        
             
             
-            
-            
-        isPali=preComputePali() #isPali[i:j] in O(1)
+        preComputePali() #isPali[i:j] in O(1)
         
         #IMP only one DP state is needed!
         #cuts[i] represents the min. number of cuts for s[0 : i+1]
