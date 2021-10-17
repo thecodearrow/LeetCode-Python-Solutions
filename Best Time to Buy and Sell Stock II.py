@@ -18,7 +18,6 @@ class Solution:
         
         #do nothing/hold
         choice2=self.getProfitDP(i+1,canBuy,n,prices,dp)
-        print(i,choice1,choice2)
         dp[key]=max(choice1,choice2)
         return dp[key]
         
@@ -33,6 +32,7 @@ class Solution:
             profit=prices[i]-prices[i-1]
             total_profit+=max(0,profit)
         
+        #return self.getProfitDP(0,True,n,prices,{})
         return total_profit
         
         
