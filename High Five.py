@@ -4,13 +4,9 @@ class Solution:
         scores=defaultdict(list) #top K
         k=5
         for id,score in items:
-            if(len(scores[id])<k):
-                heapq.heappush(scores[id],score)
-            else:
-                minScore=scores[id][0]
-                if(score>minScore):
-                    heapq.heappop(scores[id]) #remove minScore
-                    heapq.heappush(scores[id],score)
+            heapq.heappush(scores[id],score)
+            if(len(scores[id])>k):
+                heapq.heappop(scores[id]) #remove minScore
         
         ans=[]
         for id in sorted(scores.keys()):
