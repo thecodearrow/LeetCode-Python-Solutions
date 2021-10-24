@@ -1,0 +1,67 @@
+class SnakeGame:
+
+    def __init__(self, width: int, height: int, food: List[List[int]]):
+        #a snake is just an ordered collection of cells.
+        
+        self.width=width
+        self.height=height
+        self.food=food 
+        self.food_index=0
+        self.score=0
+        self.snake=deque([(0,0)]) #dequeue would be ideal to store all the snake cells! 
+        self.snake_set=defaultdict(lambda:0) #set to store snake cells! 
+        self.snake_set[(0,0)]=1
+    def outOfBounds(self,i,j):
+        if(i<0 or j<0 or i==self.height or j==self.width):
+            return True
+        return False
+        
+    def getNewHeadPos(self,direction,i,j):
+        if(direction=="D"):
+            return i+1,j
+        elif(direction=="U"):
+            return i-1,j
+        elif(direction=="L"):
+            return i,j-1
+        elif(direction=="R"):
+            return i,j+1
+    def snakeBitesItself(self,head_i,head_j):
+        #we can do this in O(1) with the help of a set!
+        return self.snake_set[(head_i,head_j)]>1
+        # snake_cells=list(self.snake)
+        # snake_cells.pop() #except head
+        # for i,j in snake_cells:
+        #     if(i==head_i and j==head_j):
+        #         return True
+        return False
+            
+        
+        
+    def move(self, direction: str) -> int:
+        head_i,head_j=self.snake[-1]
+        head_i,head_j=self.getNewHeadPos(direction,head_i,head_j) #update snake head pos
+        self.snake.append((head_i,head_j)) #add updated head to snake cell list!
+        self.snake_set[(head_i,head_j)]+=1 #add head to snake cell set
+        tail_i,tail_j=self.snake.popleft()
+        self.snake_set[(tail_i,tail_j)]-=1
+        if(self.outOfBounds(head_i,head_j)):
+            return -1
+        if(self.snakeBitesItself(head_i,head_j)):
+            return -1
+        if(self.food_index<len(self.food)):
+            food_i,food_j=self.food[self.food_index]
+            if((head_i,head_j)==(food_i,food_j)):
+                #contains food! 
+                self.snake_set[(tail_i,tail_j)]+=1
+                self.snake.appendleft((tail_i,tail_j)) #add the tail back since size+=1
+                self.food_index+=1
+                self.score+=1
+    
+
+        return self.score
+        
+        
+
+# Your SnakeGame object will be instantiated and called as such:
+# obj = SnakeGame(width, height, food)
+# param_1 = obj.move(direction)
