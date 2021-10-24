@@ -33,7 +33,7 @@ class SnakeGame:
         # for i,j in snake_cells:
         #     if(i==head_i and j==head_j):
         #         return True
-        return False
+        #return False
             
         
         
