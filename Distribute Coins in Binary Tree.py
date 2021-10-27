@@ -14,7 +14,7 @@ class Solution:
             lc=minMoves(node.left)
             rc=minMoves(node.right)
             global moves
-            moves+=abs(lc)+abs(rc)+(node.val-1)
+            moves+=abs(lc)+abs(rc)
             return lc+rc+(node.val-1) #excess coins
             
         minMoves(root)
