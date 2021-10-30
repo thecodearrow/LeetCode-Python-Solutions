@@ -24,11 +24,14 @@ class DisjointSet:
 class Solution:
     def validTree(self, n: int, edges: List[List[int]]) -> bool:
         ds=DisjointSet(n)
-        
         #Should contain n-1 edges... should be one single component and should not contain cycles! 
+        #By ensuring that there are n-1 edges, you also ensure there's only one component automatically since there are no self loops! 
+       
         if(len(edges)!=n-1):
             #a tree has n-1 edges! 
             return False
+        
+         #only thing left is checking for cycles
         for u,v in edges:
             leader_u,leader_v=ds.find(u),ds.find(v)
             if(leader_u==leader_v):
