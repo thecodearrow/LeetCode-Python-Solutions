@@ -3,14 +3,14 @@ class Solution:
         #modified dijkstra! 
         heap=[(0,0,0)] #diff,i,j
         visited=set()
-        visited.add((0,0))
         n=len(heights)
         m=len(heights[0])
-        diff=defaultdict(lambda: float("inf"))
+        diff=defaultdict(lambda: float("inf")) #min possible effort till (i,j)
         max_effort=0 #minimise max effort on path! 
         while heap:
             effort,i,j=heapq.heappop(heap) #the effort here will be minimum possible effort to get here!
             max_effort=max(max_effort,effort)
+            visited.add((i,j))
             dirs=[(0,1),(1,0),(0,-1),(-1,0)]
             if(i==n-1 and j==m-1):
                 return max_effort
