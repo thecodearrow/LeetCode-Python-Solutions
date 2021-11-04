@@ -9,15 +9,12 @@ class Solution:
         if(n==0):
             return [stringify(lower,upper)]
         ranges=[]
-        if(lower<nums[0]):
-            ranges.append(stringify(lower,nums[0]-1)) #first missing range
-        for i in range(n-1):
-            l=nums[i]+1
-            h=nums[i+1]-1
+        
+        for i in range(-1,n):
+            l=nums[i]+1 if i>=0 else lower
+            h=nums[i+1]-1 if(i<n-1) else upper
             if(l<=h):
                 ranges.append(stringify(l,h))
-        if(upper>nums[-1]):
-            ranges.append(stringify(nums[-1]+1,upper)) #last missing range
             
         return ranges
         
