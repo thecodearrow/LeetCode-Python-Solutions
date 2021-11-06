@@ -23,7 +23,7 @@ class Solution:
                     uni_status=True
                 elif(left_val is None and right_val==node.val):
                     uni_status=True
-                elif(right_val is None and right_val==node.val):
+                elif(right_val is None and left_val==node.val):
                     uni_status=True
                 elif(node.val==left_val==right_val):
                     uni_status=True
